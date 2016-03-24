@@ -1,8 +1,9 @@
-/*  MonsterMoto Shield Example Sketch
-  date: 5/24/11
-  code by: Jim Lindblom
-  hardware by: Nate Bernstein
-  SparkFun Electronics
+/*  
+
+  RoboPlatform Example Code
+  
+  
+  Derived from MonsterMoto Shield Example Sketch
  
  License: CC-SA 3.0, feel free to use this code however you'd like.
  Please improve upon it! Let me know how you've made it better.
@@ -18,6 +19,24 @@
  The motor variable in each function should be either a 0 or a 1.
  pwm in the motorGo function should be a value between 0 and 255.
  */
+ 
+// The value "onFull" below represents the max speed that will be supported.
+// You can set the value to any integer value from 0 to 255
+// It's probably best to keep the value in the range of 30 to 255
+// If it is too low, then there will not be enough power to the motors, 
+// and they will stall out.
+// For Example:
+// const int onFull = 30; // slow speed
+// const int onFull = 120; // medium speed
+// const int onFull = 255; // top speed
+// etc.
+// CHANGE THE VALUE ON THE LINE BELOW TO CHANGE THE "MAX SPEED"
+const int onFull = 120;
+
+
+const int offFull = 0;
+
+
 #define BRAKEVCC 0
 #define CW   1
 #define CCW  2
@@ -72,24 +91,23 @@ void setup()
 
   InputType = getInputType();
 
-if (Switch == InputType)
-{
-  pinMode(FwButton, INPUT_PULLUP);
-  pinMode(RevButton, INPUT_PULLUP);
-  pinMode(RightButton, INPUT_PULLUP);
-  pinMode(LeftButton, INPUT_PULLUP);
-}
-if (Joystick == InputType)
-{
-  pinMode(FwRevAxis, INPUT);
-  pinMode(RlAxis, INPUT);
-}
+  if (Switch == InputType)
+  {
+    pinMode(FwButton, INPUT_PULLUP);
+    pinMode(RevButton, INPUT_PULLUP);
+    pinMode(RightButton, INPUT_PULLUP);
+    pinMode(LeftButton, INPUT_PULLUP);
+  }
+  if (Joystick == InputType)
+  {
+    pinMode(FwRevAxis, INPUT);
+    pinMode(RlAxis, INPUT);
+  }
 
 
 }
 
-const int onFull = 110;
-const int offFull = 0;
+
 int leftDrive = 0;
 
 // positive is CW, negative is CCW;
